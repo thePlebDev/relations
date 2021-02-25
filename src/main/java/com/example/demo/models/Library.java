@@ -1,6 +1,8 @@
 package com.example.demo.models;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -9,7 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull; 
+import javax.validation.constraints.NotNull;
+
+
 
 @Entity
 public class Library {
@@ -20,8 +24,8 @@ public class Library {
 	@NotNull
 	private String name;
 	
-	@OneToMany(mappedBy = "library", cascade = CascadeType.ALL)
-	private Set<Book> books = new HashSet<>();
+	@OneToMany(mappedBy = "library", cascade = CascadeType.ALL,orphanRemoval = true)
+	private List<Book> books = new ArrayList<Book>();
 	
 	public Library () {}
 	
@@ -40,14 +44,4 @@ public class Library {
 		this.name = name;
 	}
 	
-	public Set<Book> getBooks(){
-		return books;
-	}
-	public void setBooks(Set<Book> books) {
-		this.books = books;
-		
-		for(Book b : books) {
-			b.setLibrary(this);
-		}
-	}
 }
