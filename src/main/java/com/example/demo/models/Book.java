@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull; 
 
 @Entity
 public class Book {
@@ -16,14 +15,16 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@NotNull
 	private String name;
 	
-	@ManyToOne(fetch = FetchType.LAZY,optional = false)
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name="library_id")
 	private Library library;
 	
 	public Book() {}
+	public Book(String name) {
+		this.name = name;
+	}
 	
 	public int getId() {
 		return id;

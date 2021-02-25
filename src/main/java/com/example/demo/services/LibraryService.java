@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.exceptions.LibraryNotFoundException;
+import com.example.demo.models.Book;
 import com.example.demo.models.Library;
 import com.example.demo.repositories.BookRepository;
 import com.example.demo.repositories.LibraryRepository;
@@ -38,6 +39,11 @@ public class LibraryService {
 		libraryToEdit.setName(library.getName());
 		libraryRepository.save(libraryToEdit);
 		return libraryToEdit;
+	}
+	public Library addBook(Library library, Book book) {
+		library.addBook(book);
+		libraryRepository.save(library);
+		return library;
 	}
 
 }

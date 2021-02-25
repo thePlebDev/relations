@@ -34,6 +34,9 @@ public class BookController {
 	public Book addToLibrary(@PathVariable int libraryId,@PathVariable int bookId) {
 
 		Library library = libraryService.getLibrary(libraryId);
+		Book book = bookService.findBook(bookId);
+		
+		libraryService.addBook(library, book);
 		return bookService.setLibrary(library, bookId);
 		
 	}

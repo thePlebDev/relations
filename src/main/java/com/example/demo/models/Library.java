@@ -11,7 +11,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
 
 
 
@@ -21,13 +20,16 @@ public class Library {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 	
-	@NotNull
+
 	private String name;
 	
 	@OneToMany(mappedBy = "library", cascade = CascadeType.ALL,orphanRemoval = true)
 	private List<Book> books = new ArrayList<Book>();
 	
 	public Library () {}
+	public Library(String name) {
+		this.name = name;
+	}
 	
 	//GETTERS AND SETTERS
 	public int getId() {
@@ -44,4 +46,8 @@ public class Library {
 		this.name = name;
 	}
 	
+	public List<Book> addBook(Book book){
+		books.add(book);
+		return books;
+	}
 }
