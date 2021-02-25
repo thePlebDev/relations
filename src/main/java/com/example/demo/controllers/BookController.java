@@ -32,8 +32,9 @@ public class BookController {
 	
 	@PutMapping("{libraryId}/{bookId}")
 	public Book addToLibrary(@PathVariable int libraryId,@PathVariable int bookId) {
-		Book bookToAdd = bookService.findBook(bookId);
+
 		Library library = libraryService.getLibrary(libraryId);
+		return bookService.setLibrary(library, bookId);
 		
 	}
 
